@@ -1,0 +1,20 @@
+.add-button{
+    position: fixed; /*El botón queda encima de los elementos*/
+    bottom: 20px; /*Se ajustan las coordenadas del botón, 20px para abajo, 25px a la derecha*/
+    right: 25px; 
+    border-radius: 100px;
+    border: none;
+    background-color: green;
+    width: 70px;
+    height: 70px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /*Sombra y su color. 0, 0, 0 = color; o.5 = transparencia / opacidad*/
+    justify-content: center; /*Alineación del ícono*/
+    align-items: center;
+    transition: transform 0.4s;
+    z-index: 2000;
+}
+
+.add-button:hover{
+    transform: scale(1.05,1.05);
+}
+ 

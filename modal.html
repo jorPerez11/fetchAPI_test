@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Temp</title>
+</head>
+<body>
+    <!--Los modal por defecto se deben abrir con JS. Para la practica, se mantiene abierto-->
+    <dialog id="modal-agregar" open>
+        <article>
+            <header>
+                <a href="#" class="close" id="btn-cerrarModal"></a>
+                <h3>Agregar Integrantes</h3>
+            </header>
+            <form id="frm-agregar">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <input type="email" id="correo" placeholder="Correo electrónico" required>
+                <input type="number" id="edad" placeholder="Edad" required>
+                <button type="submit" class="contrast">Guardar</button>
+            </form>
+        </article>
+    </dialog>
+</body>
+</html>

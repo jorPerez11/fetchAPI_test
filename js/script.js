@@ -64,7 +64,7 @@ document.getElementById("frm-agregar").addEventListener("submit", async e => {
     const nombre = document.getElementById("nombre").value.trim();
     const apellido = document.getElementById("apellido").value.trim();
     const email = document.getElementById("correo").value.trim();
-    const edad = documento.getElementById("edad").value.trim();
+    const edad = document.getElementById("edad").value.trim();
 
     // Validación básica
     if (!nombre || !apellido || !email || !edad) {

@@ -30,7 +30,7 @@ const tabla = document.querySelector('#tabla tbody')
                 <td>${persona.edad}</td>
                 <td>
                     <button>Editar</button>
-                    <button>Eliminar</button>
+                    <button onClick="eliminarPersonas(${persona.id})">Eliminar</button>
                 </td>
             </tr>
             `
@@ -86,6 +86,18 @@ document.getElementById("frm-agregar").addEventListener("submit", async e => {
         obtenerPersonas(); // Se manda a llamar el método para cargar datos del servidor 
     } else {
         alert("Hubo un error al agregar");
-    }
+    }    
 
 });
+
+// Método para eliminar personas
+
+async function eliminarPersonas(id) {
+    const confirmacion = confirm("¿Esta seguro de eliminar el registro?");
+
+    if (confirmacion){
+        await fetch(`${API_URL}/${id}`, {method: "DELETE"});
+        
+        obtenerPersonas();
+    }
+}

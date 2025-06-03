@@ -30,7 +30,7 @@ const tabla = document.querySelector('#tabla tbody')
                 <td>${persona.edad}</td>
                 <td>
                     <button>Editar</button>
-                    <button onClick="eliminarPersonas(${persona.id})">Eliminar</button>
+                    <button style="background-color: rgba(213, 87, 60)"; border-color: "red"  onClick="eliminarPersonas(${persona.id})">Eliminar</button>
                 </td>
             </tr>
             `

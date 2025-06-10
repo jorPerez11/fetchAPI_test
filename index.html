@@ -45,18 +45,37 @@
         
     </main>
 
-    <!--Modal para agregar integrantes-->
+    <!--Modal para AGREGAR integrantes-->
     <dialog id="modal-agregar">
         <article>
             <header>
                 <a href="#" class="close" id="btn-cerrarModal"></a>
-                <h3>Agregar Integrantes</h3>
+                <h3>Agregar Integrante</h3>
             </header>
             <form id="frm-agregar">
                 <input type="text" id="nombre" placeholder="Nombre" required>
                 <input type="text" id="apellido" placeholder="Apellido" required>
                 <input type="email" id="correo" placeholder="Correo electrónico" required>
                 <input type="number" id="edad" placeholder="Edad" required>
+                <button type="submit" class="contrast">Guardar</button>
+            </form>
+        </article>
+    </dialog>
+
+    <!--Modal para EDITAR integrantes-->
+    <!--Se reutiliza el modal, pero se necesita cambiar los id's-->
+    <dialog id="modal-editar">
+        <article>
+            <header>
+                <a href="#" class="close" id="btn-cerrarEditar"></a>
+                <h3>Editar Integrante</h3>
+            </header>
+            <form id="frm-editar">
+                <input type="hidden" id="idEditar"> <!--Se añade un campo invisible, el cual obtiene el id a editar-->
+                <input type="text" id="nombre_editar" placeholder="Nombre" required>
+                <input type="text" id="apellido_editar" placeholder="Apellido" required>
+                <input type="email" id="correo_editar" placeholder="Correo electrónico" required>
+                <input type="number" id="edad_editar" placeholder="Edad" required>
                 <button type="submit" class="contrast">Guardar</button>
             </form>
         </article>

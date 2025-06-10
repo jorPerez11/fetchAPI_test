@@ -1,6 +1,7 @@
 //Creación de variable constante. tendrá la URL de la API
 const API_URL = "https://retoolapi.dev/SjC1H1/data";
 
+
 //Función que llama al JSON
 //La palabra async indica que la función es asíncrona, es decir, puede contener operaciones que esperan resultados que tardan un poco
 async function obtenerPersonas(){
@@ -26,11 +27,11 @@ const tabla = document.querySelector('#tabla tbody')
                 <td>${persona.id}</td>
                 <td>${persona.nombre}</td>
                 <td>${persona.apellido}</td>
-                <td>${persona.email}</td>
+                <td>${persona.correo}</td>
                 <td>${persona.edad}</td>
                 <td>
-                    <button>Editar</button>
-                    <button style="background-color: rgba(213, 87, 60)"; border-color: "red"  onClick="eliminarPersonas(${persona.id})">Eliminar</button>
+                    <button onClick="abrirModalEditar('${persona.nombre}', '${persona.apellido}', '${persona.correo}', '${persona.edad}', ${persona.id})">Editar</button>
+                    <button style="background-color: rgba(213, 87, 60)"; border-color: none;  onClick="eliminarPersonas(${persona.id})">Eliminar</button>
                 </td>
             </tr>
             `
@@ -63,11 +64,11 @@ document.getElementById("frm-agregar").addEventListener("submit", async e => {
     // Capturar los valores del formulario
     const nombre = document.getElementById("nombre").value.trim();
     const apellido = document.getElementById("apellido").value.trim();
-    const email = document.getElementById("correo").value.trim();
+    const correo = document.getElementById("correo").value.trim();
     const edad = document.getElementById("edad").value.trim();
 
     // Validación básica
-    if (!nombre || !apellido || !email || !edad) {
+    if (!nombre || !apellido || !correo || !edad) {
         alert("Por favor, rellene todos los campos");
         return; // Evita que el formulario se envíe
     }
@@ -101,3 +102,59 @@ async function eliminarPersonas(id) {
         obtenerPersonas();
     }
 }
+
+// Proceso para editar un registro --
+
+// Proceso para agregar funcionalidad al botón editar
+const modalEditar = document.getElementById("modal-editar");
+const btnCerrarEditar = document.getElementById("btn-cerrarEditar");
+
+btnCerrarEditar.addEventListener("click", () => {
+    modalEditar.close();
+});
+
+// Se agregan los valores de registro en base a la persona (id) seleccionado
+function abrirModalEditar(nombre, apellido, correo, edad, id){
+    document.getElementById("idEditar").value = id;
+    document.getElementById("nombre_editar").value = nombre;
+    document.getElementById("apellido_editar").value = apellido;
+    document.getElementById("correo_editar").value = correo;
+    document.getElementById("edad_editar").value = edad;
+
+    modalEditar.showModal();
+}
+
+
+//Editar integrante desde formulario
+document.getElementById("frm-editar").addEventListener("submit", async e => {
+    e.preventDefault(); // "e" representa el evento submit. Evita que el formulario se envíe de golpe
+    // Capturar los valores del formulario
+    const id = document.getElementById("idEditar").value;
+    const nombre = document.getElementById("nombre_editar").value.trim();
+    const apellido = document.getElementById("apellido_editar").value.trim();
+    const correo = document.getElementById("correo_editar").value.trim();
+    const edad = document.getElementById("edad_editar").value.trim();
+
+    // Validación básica
+    if (!id || !nombre || !apellido || !correo || !edad) {
+        alert("Por favor, rellene todos los campos");
+        return; // Evita que el formulario se envíe
+    }
+
+    // Llamar a la API para enviar datos
+    const respuesta = await fetch(`${API_URL}/${id}`, { 
+        method: "PUT", // Método HTTP PUT para enviar datos 
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({edad, correo, nombre, apellido}) //IMPORTANTE: los datos deben de ir en orden de datos según el JSON de la API (API_URL)
+    });
+    
+    if (respuesta.ok){
+        alert("El registro fue editado correctamente");
+        document.getElementById("frm-editar").reset(); // Se limpia el formulario
+        modalEditar.close(); // Se cierra el formulario
+        obtenerPersonas(); // Se manda a llamar el método para cargar datos del servidor 
+    } else {
+        alert("Hubo un error al agregar");
+    }    
+
+});
